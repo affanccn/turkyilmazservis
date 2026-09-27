@@ -17,7 +17,8 @@ import {
   Radio, 
   Building2, 
   PackageCheck,
-  CreditCard
+  CreditCard,
+  Sparkles
 } from 'lucide-react'
 
 export const revalidate = 60
@@ -121,7 +122,7 @@ export default async function Home() {
       {/* 2. HEADER */}
       <Navbar phone={phone} cleanPhone={cleanPhone} />
 
-      {/* 3. HERO / MANŞET BÖLÜMÜ (AYDINLIK & KAVİSLİ BEYAZ EŞYA GÖRSELLİ) */}
+      {/* 3. HERO / MANŞET BÖLÜMÜ (AYDINLIK & KAVİSLİ BEYAZ EŞYA VİTRİNİ) */}
       <section className="relative overflow-hidden pt-8 sm:pt-14 pb-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl 2xl:max-w-[1440px] mx-auto relative z-10">
           
@@ -166,20 +167,75 @@ export default async function Home() {
 
             </div>
 
-            {/* SAĞ KOLON: KAVİSLİ BEYAZ EŞYA GÖRSELİ VE YAN ROZETLER */}
+            {/* SAĞ KOLON: KAVİSLİ BEYAZ EŞYA VİTRİNİ VE ROZETLER (400 Hatasız, Güvenli Mockup) */}
             <div className="lg:col-span-5 relative">
               <div className="relative mx-auto max-w-md lg:max-w-none">
                 
-                {/* Arka Kavisli Zemin & Cihaz Görseli */}
-                <div className="relative z-10 w-full h-72 sm:h-84 md:h-96 rounded-3xl overflow-hidden bg-gradient-to-tr from-red-100 via-rose-50 to-white p-4 flex items-center justify-center border border-red-200/60 shadow-lg">
-                  <Image
-                    src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=900&q=80"
-                    alt="Türkyılmaz Servis Beyaz Eşya ve Kombi Tamiri"
-                    fill
-                    className="object-cover rounded-2xl mix-blend-multiply opacity-95 hover:scale-105 transition duration-700"
-                    priority
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-white/80 via-transparent to-transparent" />
+                {/* Kavisli Şık Cihaz Vitrini (Önerilen Tasarım) */}
+                <div className="relative z-10 w-full rounded-3xl overflow-hidden bg-gradient-to-tr from-red-100 via-rose-50 to-white p-6 sm:p-8 border border-red-200/80 shadow-xl">
+                  
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-[11px] font-bold text-red-600 bg-red-50 border border-red-200 px-3 py-1 rounded-full uppercase tracking-wider">
+                      Orijinal Parça & Bakım
+                    </span>
+                    <span className="flex items-center gap-1 text-[11px] font-bold text-slate-600">
+                      <Sparkles className="w-3.5 h-3.5 text-amber-500" /> Kurumsal Standart
+                    </span>
+                  </div>
+
+                  {/* Vektörel Beyaz Eşya Vitrin İllüstrasyonu */}
+                  <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/90 shadow-sm flex items-center justify-around gap-4 text-center my-2">
+                    
+                    {/* Çamaşır Makinesi */}
+                    <div className="flex flex-col items-center group">
+                      <div className="w-16 h-20 bg-slate-50 border-2 border-slate-300 rounded-xl p-2 flex flex-col justify-between shadow-inner group-hover:border-red-500 transition">
+                        <div className="w-full flex justify-between items-center">
+                          <span className="w-4 h-1 bg-slate-300 rounded"></span>
+                          <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+                        </div>
+                        <div className="w-10 h-10 rounded-full border-2 border-slate-400 mx-auto flex items-center justify-center bg-slate-100">
+                          <div className="w-5 h-5 rounded-full border border-dashed border-slate-400"></div>
+                        </div>
+                        <div className="w-full h-1 bg-slate-200 rounded"></div>
+                      </div>
+                      <span className="text-[11px] font-bold text-slate-800 mt-2">Çamaşır</span>
+                    </div>
+
+                    {/* Buzdolabı */}
+                    <div className="flex flex-col items-center group">
+                      <div className="w-18 h-26 bg-slate-50 border-2 border-slate-300 rounded-xl p-2 flex flex-col justify-between shadow-inner group-hover:border-red-500 transition">
+                        <div className="w-full h-8 border-b-2 border-slate-200 flex items-end justify-end pr-1 pb-1">
+                          <span className="w-1 h-3 bg-slate-400 rounded"></span>
+                        </div>
+                        <div className="w-full flex-1 flex items-center justify-end pr-1">
+                          <span className="w-1 h-5 bg-slate-400 rounded"></span>
+                        </div>
+                      </div>
+                      <span className="text-[11px] font-bold text-slate-800 mt-2">Buzdolabı</span>
+                    </div>
+
+                    {/* Kombi / Klima */}
+                    <div className="flex flex-col items-center group">
+                      <div className="w-16 h-20 bg-slate-50 border-2 border-slate-300 rounded-xl p-2 flex flex-col justify-between shadow-inner group-hover:border-red-500 transition">
+                        <div className="w-full bg-slate-200 h-3 rounded flex items-center justify-center">
+                          <span className="text-[8px] font-mono font-bold text-slate-600">45°C</span>
+                        </div>
+                        <div className="w-8 h-8 rounded-full border border-slate-300 mx-auto flex items-center justify-center text-red-500">
+                          <Wrench className="w-4 h-4" />
+                        </div>
+                        <div className="flex justify-around w-full">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                          <span className="w-1.5 h-1.5 rounded-full bg-slate-300"></span>
+                        </div>
+                      </div>
+                      <span className="text-[11px] font-bold text-slate-800 mt-2">Kombi & Klima</span>
+                    </div>
+
+                  </div>
+
+                  <p className="text-center text-xs font-semibold text-slate-600 mt-3">
+                    Tüm cihazlarda evinizde, gözünüzün önünde garantili tamir[cite: 2].
+                  </p>
                 </div>
 
                 {/* Sağ Görsel Üstü 2 Mini Rozet */}
