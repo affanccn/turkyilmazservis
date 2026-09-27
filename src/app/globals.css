@@ -14,7 +14,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Ferah, göz yormayan mikro açık tema ızgarası */
+/* Ferah, göz yormayan açık tema mikro ızgarası */
 .tech-grid-bg {
   background-color: #f8fafc;
   background-image: 
@@ -24,7 +24,6 @@ body {
   background-size: 100% 100%, 32px 32px, 32px 32px;
 }
 
-/* Şık hafif buton parıltısı */
 @keyframes shimmer {
   100% {
     transform: translateX(100%);
