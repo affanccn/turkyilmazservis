@@ -4,10 +4,11 @@ import { service } from './service'
 import { caseStudy } from './caseStudy' // <-- Eklendi
 import { maintenanceType } from './maintenance'
 import { sparePartType } from './sparePart'
+import { postType } from './post'
 // diğer importlar (siteSettings, service, caseStudy vb.)
 
 
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [siteSettings, service, caseStudy, maintenanceType, sparePartType], // <-- caseStudy, maintenanceType ve sparePartType eklendi
+  types: [siteSettings, service, caseStudy, maintenanceType, sparePartType,postType], // <-- caseStudy, maintenanceType ve sparePartType eklendi
 }
