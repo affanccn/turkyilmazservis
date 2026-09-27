@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next'
 import { LANDING_PAGES } from '@/lib/landingPages'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = '[https://www.turkyilmazservis.com](https://www.turkyilmazservis.com)'
+  const baseUrl = 'https://www.turkyilmazservis.com'
   const currentDate = new Date()
 
   const staticPages: MetadataRoute.Sitemap = [
