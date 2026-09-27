@@ -10,7 +10,8 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('[https://www.turkyilmazservis.com](https://www.turkyilmazservis.com)'),
+  
+  metadataBase: new URL('https://www.turkyilmazservis.com'),
   title: {
     default: 'Gebze, Darıca & Çayırova Beyaz Eşya Servisi | Arçelik Beko Vestel',
     template: '%s | Türkyılmaz Beyaz Eşya Servisi'
