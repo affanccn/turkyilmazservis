@@ -2,7 +2,8 @@
 
 import React, { useState } from 'react'
 import Link from 'next/link'
-import { PhoneCall, Menu, X, ShieldCheck, Wrench } from 'lucide-react'
+import Image from 'next/image'
+import { PhoneCall, Menu, X, CalendarClock, Wrench, MapPin, PackageCheck } from 'lucide-react'
 
 interface NavbarProps {
   phone: string
@@ -22,83 +23,95 @@ export default function Navbar({ phone, cleanPhone }: NavbarProps) {
   ]
 
   return (
-    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200/90 shadow-sm transition-all">
-      <div className="max-w-7xl 2xl:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
-          
-          {/* Logo & Marka */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-red-600 to-rose-700 flex items-center justify-center text-white shadow-md shadow-red-500/20 group-hover:scale-105 transition">
-              <Wrench className="w-5 h-5" />
-            </div>
-            <div>
-              <span className="text-xl font-black text-slate-900 tracking-tight flex items-center gap-1.5">
-                TÜRK<span className="text-red-600">YILMAZ</span>
-              </span>
-              <span className="block text-[10px] font-bold text-slate-500 tracking-widest uppercase -mt-1">
-                Beyaz Eşya Servisi
-              </span>
-            </div>
-          </Link>
-
-          {/* Masaüstü Menü */}
-          <nav className="hidden lg:flex items-center gap-1.5">
-            {navLinks.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="text-[13px] font-semibold text-slate-600 hover:text-red-600 px-3.5 py-2 rounded-xl hover:bg-slate-100 transition"
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-
-          {/* Masaüstü Telefon Butonu */}
-          <div className="hidden sm:flex items-center gap-3">
-            <a
-              href={`tel:${cleanPhone}`}
-              className="relative overflow-hidden inline-flex items-center gap-2.5 bg-red-600 hover:bg-red-700 text-white font-extrabold text-sm px-5 py-2.5 rounded-xl shadow-md shadow-red-600/20 hover:scale-105 transition"
-            >
-              <PhoneCall className="w-4 h-4 animate-bounce" />
-              <span>{phone}</span>
-            </a>
+    <header className="sticky top-0 z-40 bg-zinc-950/90 backdrop-blur-xl border-b border-zinc-800/80">
+      <div className="max-w-7xl 2xl:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between">
+        
+        {/* Logo & Marka */}
+        <Link href="/" className="flex items-center gap-3 group">
+          <div className="relative w-12 h-12 rounded-2xl overflow-hidden bg-black border border-zinc-700/80 group-hover:border-zinc-400 transition-colors flex items-center justify-center shadow-lg shadow-black/40">
+            <Image 
+              src="/logo.png" 
+              alt="Türkyılmaz Beyaz Eşya Servisi Logo" 
+              fill 
+              className="object-contain p-1" 
+              priority
+            />
           </div>
-
-          {/* Mobil Menü Butonu */}
-          <div className="lg:hidden flex items-center">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="p-2.5 rounded-xl text-slate-700 hover:bg-slate-100 transition"
-              aria-label="Menüyü Aç"
-            >
-              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
+          <div>
+            <div className="flex items-center gap-1.5 leading-none">
+              <span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-zinc-400 tracking-wider text-xl">
+                TÜRK
+              </span>
+              <span className="font-black text-red-600 tracking-wider text-xl">
+                YILMAZ
+              </span>
+            </div>
+            <span className="text-[10px] text-zinc-400 font-bold tracking-widest uppercase block mt-1">
+              Beyaz Eşya Servisi
+            </span>
           </div>
+        </Link>
 
-        </div>
-      </div>
-
-      {/* Mobil Açılır Menü */}
-      {isOpen && (
-        <div className="lg:hidden bg-white border-b border-slate-200 px-4 pt-3 pb-6 space-y-2 shadow-xl">
-          {navLinks.map((item) => (
+        {/* Masaüstü Menü Bağlantıları */}
+        <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
+          {navLinks.map((link) => (
             <Link
-              key={item.href}
-              href={item.href}
-              onClick={() => setIsOpen(false)}
-              className="block text-sm font-semibold text-slate-700 hover:text-red-600 hover:bg-slate-50 px-4 py-2.5 rounded-xl transition"
+              key={link.href}
+              href={link.href}
+              className="text-xs font-bold text-zinc-300 hover:text-white hover:bg-zinc-900 border border-transparent hover:border-zinc-800 px-3.5 py-2 rounded-xl transition duration-200"
             >
-              {item.label}
+              {link.label}
             </Link>
           ))}
-          <div className="pt-3">
+        </nav>
+
+        {/* Masaüstü Sağ Çağrı Butonu & Mobil Menü Butonu */}
+        <div className="flex items-center gap-3">
+          <a
+            href={`tel:${cleanPhone}`}
+            className="hidden sm:inline-flex relative overflow-hidden items-center gap-2 bg-gradient-to-r from-red-600 via-rose-600 to-red-600 hover:from-red-700 hover:to-rose-700 text-white font-black text-xs sm:text-sm px-4 py-2.5 rounded-xl shadow-md transition-all hover:scale-105 active:scale-95"
+          >
+            <span className="absolute inset-0 w-1/2 h-full bg-white/20 transform -skew-x-12 animate-shimmer" />
+            <PhoneCall className="w-4 h-4 animate-pulse shrink-0" />
+            <span>{phone}</span>
+          </a>
+
+          {/* Mobilde Açılır Menü Butonu (Hamburger) */}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label="Menüyü Aç/Kapat"
+            className="lg:hidden w-11 h-11 bg-zinc-900 border border-zinc-700/80 text-zinc-200 rounded-xl flex items-center justify-center hover:bg-zinc-800 hover:text-white transition cursor-pointer"
+          >
+            {isOpen ? <X className="w-5 h-5 text-red-500" /> : <Menu className="w-5 h-5" />}
+          </button>
+        </div>
+
+      </div>
+
+      {/* Mobil Açılır Menü Çekmecesi */}
+      {isOpen && (
+        <div className="lg:hidden bg-zinc-950/98 border-b border-zinc-800 px-4 pt-3 pb-6 animate-in slide-in-from-top-4 duration-200">
+          <div className="space-y-1">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setIsOpen(false)}
+                className="flex items-center justify-between py-3 px-4 rounded-xl text-sm font-bold text-zinc-200 hover:bg-zinc-900 hover:text-white border border-transparent hover:border-zinc-800 transition"
+              >
+                <span>{link.label}</span>
+                <span className="text-xs text-zinc-500">→</span>
+              </Link>
+            ))}
+          </div>
+
+          <div className="mt-4 pt-4 border-t border-zinc-900 space-y-2">
             <a
               href={`tel:${cleanPhone}`}
-              className="w-full flex items-center justify-center gap-2 bg-red-600 text-white font-bold text-sm py-3 rounded-xl shadow-md"
+              className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-red-600 to-rose-600 text-white font-black text-sm py-3.5 rounded-xl shadow-lg"
             >
-              <PhoneCall className="w-4 h-4" />
-              <span>Hemen Ara: {phone}</span>
+              <PhoneCall className="w-4 h-4 animate-bounce" />
+              <span>Hemen Servis Çağır: {phone}</span>
             </a>
           </div>
         </div>
