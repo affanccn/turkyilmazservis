@@ -83,10 +83,46 @@ body {
   animation-play-state: paused;
 }
 
-/* Kırmızı tonlu hafif teknik ızgara dokusu */
+/* --- YENİ NESİL GEÇİŞLİ & DERİNLİKLİ ATÖLYE ZEMİNİ --- */
 .tech-grid-bg {
+  background-color: #09090b; /* Koyu titanyum/antrasit taban */
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  background-size: 32px 32px;
+    /* 1. Üst Ortadan Yayılan Çok Hafif Kor Kırmızı Işıma (Vurgu) */
+    radial-gradient(circle at 50% -10%, rgba(220, 38, 38, 0.12) 0%, transparent 45%),
+    
+    /* 2. Sağ ve Sol Yanlardan Derinlik Katan Metalik/Gümüş Gölgeler */
+    radial-gradient(circle at 100% 30%, rgba(148, 163, 184, 0.04) 0%, transparent 40%),
+    radial-gradient(circle at 0% 60%, rgba(220, 38, 38, 0.05) 0%, transparent 40%),
+
+    /* 3. İpeksi, Göz Yormayan Mikro Izgara Çizgileri (Noktasal & İnce) */
+    linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  
+  background-size: 
+    100% 100%, 
+    100% 100%, 
+    100% 100%, 
+    36px 36px, 
+    36px 36px;
+
+  /* Kenarlara doğru ızgarayı yumuşakça yok eden vignette maskesi */
+  mask-image: radial-gradient(ellipse at 50% 30%, black 60%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 30%, black 60%, transparent 100%);
+}
+
+/* Sayfa içinde hafif süzülen ortam ışıkları */
+@keyframes ambientGlow {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+    opacity: 0.15;
+  }
+  50% {
+    transform: translateY(-20px) scale(1.05);
+    opacity: 0.22;
+  }
+}
+
+.ambient-orb {
+  animation: ambientGlow 8s ease-in-out infinite;
+  will-change: transform, opacity;
 }
