@@ -9,7 +9,7 @@ export const client = createClient({
   useCdn: false, // Güncellemelerin anında sitede görünmesi için false
 })
 const builder = createImageUrlBuilder(client)
-const builder = imageUrlBuilder(client)
+
 
 export function urlFor(source: any) {
   return builder.image(source)
