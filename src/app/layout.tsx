@@ -10,7 +10,7 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://turkyilmazservis.vercel.app'),
+  metadataBase: new URL('[https://www.turkyilmazservis.com](https://www.turkyilmazservis.com)'),
   title: {
     default: 'Gebze, Darıca & Çayırova Beyaz Eşya Servisi | Arçelik Beko Vestel',
     template: '%s | Türkyılmaz Beyaz Eşya Servisi'
@@ -83,11 +83,11 @@ export default function RootLayout({
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'ApplianceRepair',
-    '@id': 'https://turkyilmazservis.vercel.app/#business',
+    '@id': 'https://www.turkyilmazservis.com/#business',
     name: 'Türkyılmaz Beyaz Eşya Servisi',
-    url: 'https://turkyilmazservis.vercel.app',
-    logo: 'https://turkyilmazservis.vercel.app/logo.png',
-    image: 'https://turkyilmazservis.vercel.app/logo.png',
+    url: 'https://www.turkyilmazservis.com',
+    logo: 'https://www.turkyilmazservis.com/logo.png',
+    image: 'https://www.turkyilmazservis.com/logo.png',
     telephone: '+905521164128',
     priceRange: '₺₺',
     address: {
