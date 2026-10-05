@@ -5,13 +5,13 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Navbar from '@/components/Navbar'
 import WhatsappWidget from '@/components/WhatsappWidget'
-import { 
-  PhoneCall, 
-  ShieldCheck, 
-  Clock, 
-  MapPin, 
-  Wrench, 
-  CheckCircle2, 
+import {
+  PhoneCall,
+  ShieldCheck,
+  Clock,
+  MapPin,
+  Wrench,
+  CheckCircle2,
   ChevronRight,
   HelpCircle,
   CalendarClock,
@@ -30,26 +30,26 @@ async function getData() {
 
     const activeServices = sanityServices && sanityServices.length > 0 ? sanityServices : DEFAULT_SERVICES
 
-    return { 
+    return {
       settings: settings || {
         phone: '0552 116 41 28',
         siteName: 'Türkyılmaz Beyaz Eşya Servisi',
         address: 'Fevziçakmak Mah. Doktor Zeki Acar Cad., Şebnem Sk. No:11, Darıca/Kocaeli',
-        serviceAreas: ['Gebze', 'Darıca', 'Çayırova', 'Dilovası', 'Körfez', 'İzmit', 'Gölcük', 'Derince', 'Pendik', 'Kartal', 'Tuzla', 'Şifa']
-      }, 
-      services: activeServices, 
-      caseStudies 
+        serviceAreas: ['Gebze', 'Darıca', 'Çayırova', 'Dilovası', 'Körfez', 'İzmit', 'Gölcük', 'Derince', 'Kartepe']
+      },
+      services: activeServices,
+      caseStudies
     }
   } catch (error) {
-    return { 
+    return {
       settings: {
         phone: '0552 116 41 28',
         siteName: 'Türkyılmaz Beyaz Eşya Servisi',
         address: 'Fevziçakmak Mah. Doktor Zeki Acar Cad., Şebnem Sk. No:11, Darıca/Kocaeli',
-        serviceAreas: ['Gebze', 'Darıca', 'Çayırova', 'Dilovası', 'Körfez', 'İzmit', 'Gölcük', 'Derince', 'Pendik', 'Kartal', 'Tuzla', 'Şifa']
-      }, 
-      services: DEFAULT_SERVICES, 
-      caseStudies: DEFAULT_CASES 
+        serviceAreas: ['Gebze', 'Darıca', 'Çayırova', 'Dilovası', 'Körfez', 'İzmit', 'Gölcük', 'Derince', 'Kartepe']
+      },
+      services: DEFAULT_SERVICES,
+      caseStudies: DEFAULT_CASES
     }
   }
 }
@@ -59,14 +59,14 @@ export default async function Home() {
   const phone = settings?.phone || '0552 116 41 28'
   const cleanPhone = phone.replace(/\s+/g, '').replace('+', '')
   const shopAddress = settings?.address || 'Fevziçakmak Mah. Doktor Zeki Acar Cad., Şebnem Sk. No:11, Darıca/Kocaeli'
-  
-  const serviceAreas = settings?.serviceAreas && settings.serviceAreas.length > 0 
-    ? settings.serviceAreas 
-    : ['Gebze', 'Darıca', 'Çayırova', 'Dilovası', 'Körfez', 'İzmit', 'Gölcük', 'Derince', 'Pendik', 'Kartal', 'Tuzla', 'Şifa']
+
+  const serviceAreas = settings?.serviceAreas && settings.serviceAreas.length > 0
+    ? settings.serviceAreas
+    : ['Gebze', 'Darıca', 'Çayırova', 'Dilovası', 'Körfez', 'İzmit', 'Gölcük', 'Derince', 'Kartepe']
 
   // Görseldeki 13 markanın tam listesi
   const brands = [
-    'Arçelik', 'Beko', 'Samsung', 'Grundig', 'Altus', 'Vestel', 'Regal', 
+    'Arçelik', 'Beko', 'Samsung', 'Grundig', 'Altus', 'Vestel', 'Regal',
     'Keysmart', 'Flavel', 'Finlux', 'SEG', 'Kumtel', 'Eminçelik'
   ]
 
@@ -95,7 +95,7 @@ export default async function Home() {
 
   return (
     <main className="relative min-h-screen bg-zinc-950 text-slate-100 selection:bg-red-600 selection:text-white pb-28 sm:pb-0 overflow-x-hidden tech-grid-bg">
-      
+
       {/* Arka Plan Işıkları */}
       <div className="pointer-events-none absolute -left-40 top-0 w-96 h-96 bg-red-600/10 rounded-full blur-3xl -z-10" />
       <div className="pointer-events-none absolute -right-40 top-1/4 w-96 h-96 bg-slate-400/5 rounded-full blur-3xl -z-10" />
@@ -125,145 +125,47 @@ export default async function Home() {
       {/* 2. HEADER */}
       <Navbar phone={phone} cleanPhone={cleanPhone} />
 
-      {/* 3. HERO / MANŞET BÖLÜMÜ (Genişletilmiş ve İki Yanı Canlandırılmış) */}
-      <section className="relative overflow-hidden pt-12 pb-20 px-4 sm:px-6 lg:px-8">
-        
-        {/* ARKA PLAN TEKNİK ŞEMA / DEVRE DOKUSU (Boşluğu Dolduran Hafif Çizgiler) */}
-        <div className="pointer-events-none absolute inset-0 flex items-center justify-between opacity-15 select-none -z-10">
-          <div className="w-96 h-96 rounded-full border border-dashed border-zinc-700/60 -translate-x-32 flex items-center justify-center animate-spin-slow">
-            <div className="w-72 h-72 rounded-full border border-zinc-800 flex items-center justify-center">
-              <Wrench className="w-24 h-24 text-zinc-600/30" />
-            </div>
-          </div>
-          <div className="w-96 h-96 rounded-full border border-dashed border-red-900/30 translate-x-32 flex items-center justify-center animate-spin-reverse-slow">
-            <div className="w-72 h-72 rounded-full border border-zinc-800 flex items-center justify-center">
-              <ShieldCheck className="w-24 h-24 text-zinc-600/30" />
-            </div>
-          </div>
-        </div>
+      {/* 3. HERO BÖLÜMÜ */}
+      <section className="relative overflow-hidden pt-12 pb-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-5xl 2xl:max-w-6xl mx-auto text-center relative z-10">
 
-        <div className="max-w-7xl 2xl:max-w-[1440px] mx-auto relative z-10">
-          
-          <div className="grid lg:grid-cols-12 gap-8 items-center">
-            
-            {/* SOL YAN VİTRİN KARTI (Büyük Ekranlarda Boşluğu Doldurur) */}
-            <div className="hidden xl:flex lg:col-span-3 flex-col gap-4">
-              
-              {/* Kart 1: Hızlı Mobil Müdahale */}
-              <div className="bg-zinc-900/70 backdrop-blur-md border border-zinc-800/80 p-4 rounded-3xl shadow-xl hover:border-zinc-700 transition group">
-                <div className="flex items-center gap-3 mb-2">
-                  <div className="w-10 h-10 rounded-2xl bg-zinc-800/80 border border-zinc-700 flex items-center justify-center text-red-500 group-hover:scale-105 transition">
-                    <Clock className="w-5 h-5 animate-pulse" />
-                  </div>
-                  <div>
-                    <p className="text-[11px] font-bold text-red-500 uppercase tracking-wider">Hızlı Mobil Hat</p>
-                    <p className="text-sm font-black text-white">Aynı Gün Servis</p>
-                  </div>
-                </div>
-                <p className="text-xs text-zinc-400 leading-relaxed">
-                  Gebze, Darıca & Çayırova genelinde 25-45 dakikada yerinde arıza tespiti.
-                </p>
-              </div>
-
-              {/* Kart 2: Ödeme Kolaylığı */}
-              <div className="bg-zinc-900/70 backdrop-blur-md border border-zinc-800/80 p-4 rounded-3xl shadow-xl hover:border-zinc-700 transition group">
-                <div className="flex items-center gap-3 mb-2">
-                  <div className="w-10 h-10 rounded-2xl bg-zinc-800/80 border border-zinc-700 flex items-center justify-center text-slate-200 group-hover:scale-105 transition">
-                    <CheckCircle2 className="w-5 h-5 text-emerald-400" />
-                  </div>
-                  <div>
-                    <p className="text-[11px] font-bold text-slate-300 uppercase tracking-wider">Şeffaf Süreç</p>
-                    <p className="text-sm font-black text-white">Kapıda Kredi Kartı</p>
-                  </div>
-                </div>
-                <p className="text-xs text-zinc-400 leading-relaxed">
-                  Gezici mobil araçlarımızda POS cihazı mevcuttur; taksit ve kartla ödeme imkanı.
-                </p>
-              </div>
-
-            </div>
-
-            {/* ORTA ANA ALAN (Manşet Metni & Butonlar) */}
-            <div className="lg:col-span-12 xl:col-span-6 text-center">
-              
-              <div className="inline-flex items-center gap-2 bg-zinc-900/90 border border-zinc-700/80 text-zinc-200 text-xs font-extrabold px-4 py-1.5 rounded-full mb-6 shadow-sm">
-                <Radio className="w-3.5 h-3.5 text-red-500 animate-pulse" />
-                <span>Gebze, Darıca & Çayırova Genelinde Aynı Gün Yerinde Servis</span>
-              </div>
-
-              <h1 className="text-[1.85rem] xs:text-3xl sm:text-5xl lg:text-5xl 2xl:text-6xl font-black text-white tracking-tight leading-tight sm:leading-none">
-                Türkyılmaz Servis – <br className="hidden sm:block" />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-zinc-400">
-                  Gebze, Darıca & Çayırova Beyaz Eşya Servisi
-                </span>
-              </h1>
-
-              <p className="mt-5 text-sm sm:text-base text-zinc-300 max-w-2xl mx-auto leading-relaxed">
-                Türkyılmaz Beyaz Eşya Servisi olarak Gebze, Darıca ve Çayırova'da Arçelik, Beko, Vestel, Samsung ve diğer markalara yerinde servis hizmeti sunuyoruz. Dürüst arıza tespiti ve <strong className="text-white font-bold underline decoration-red-600 underline-offset-4">6 ay parça garantisi</strong> ile adresinizde tamir çözümleri.
-              </p>
-
-              <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3.5">
-                <a
-                  href={`tel:${cleanPhone}`}
-                  className="relative overflow-hidden w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-gradient-to-r from-red-600 via-rose-600 to-red-700 hover:from-red-700 hover:to-rose-800 text-white font-black text-base px-8 py-4 rounded-2xl shadow-xl shadow-red-600/30 transition-all hover:scale-105 active:scale-95"
-                >
-                  <span className="absolute inset-0 w-1/2 h-full bg-white/20 transform -skew-x-12 animate-shimmer" />
-                  <PhoneCall className="w-5 h-5 animate-bounce" />
-                  <span>Hemen Servis Çağır: {phone}</span>
-                </a>
-
-                <Link
-                  href="/yedek-parca"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-zinc-900 hover:bg-zinc-800 text-zinc-100 font-bold text-base px-7 py-4 rounded-2xl border border-zinc-700/80 hover:border-zinc-400 shadow-lg transition-all hover:scale-105"
-                >
-                  <PackageCheck className="w-5 h-5 text-red-500" />
-                  <span>Yedek Parça Kataloğu</span>
-                </Link>
-              </div>
-
-            </div>
-
-            {/* SAĞ YAN VİTRİN KARTI (Büyük Ekranlarda Boşluğu Doldurur) */}
-            <div className="hidden xl:flex lg:col-span-3 flex-col gap-4">
-              
-              {/* Kart 3: Resmi Belge ve Garanti */}
-              <div className="bg-zinc-900/70 backdrop-blur-md border border-zinc-800/80 p-4 rounded-3xl shadow-xl hover:border-zinc-700 transition group">
-                <div className="flex items-center gap-3 mb-2">
-                  <div className="w-10 h-10 rounded-2xl bg-zinc-800/80 border border-zinc-700 flex items-center justify-center text-red-500 group-hover:scale-105 transition">
-                    <ShieldCheck className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <p className="text-[11px] font-bold text-red-500 uppercase tracking-wider">Kurumsal Güvence</p>
-                    <p className="text-sm font-black text-white">6 Ay Parça Garantisi</p>
-                  </div>
-                </div>
-                <p className="text-xs text-zinc-400 leading-relaxed">
-                  Değişen tüm orijinal yedek parçalar Türkyılmaz Servis kaşeli servis fişi ile güvencededir.
-                </p>
-              </div>
-
-              {/* Kart 4: Doğru Teşhis */}
-              <div className="bg-zinc-900/70 backdrop-blur-md border border-zinc-800/80 p-4 rounded-3xl shadow-xl hover:border-zinc-700 transition group">
-                <div className="flex items-center gap-3 mb-2">
-                  <div className="w-10 h-10 rounded-2xl bg-zinc-800/80 border border-zinc-700 flex items-center justify-center text-slate-200 group-hover:scale-105 transition">
-                    <Wrench className="w-5 h-5 text-slate-300" />
-                  </div>
-                  <div>
-                    <p className="text-[11px] font-bold text-slate-300 uppercase tracking-wider">Dürüst Ustalık</p>
-                    <p className="text-sm font-black text-white">Gereksiz Masrafa Son</p>
-                  </div>
-                </div>
-                <p className="text-xs text-zinc-400 leading-relaxed">
-                  Sağlam parçayı değiştirmeden, arızanın ana kök nedenini yerinde tespit edip çözüyoruz.
-                </p>
-              </div>
-
-            </div>
-
+          <div className="inline-flex items-center gap-2 bg-zinc-900 border border-zinc-700/80 text-zinc-200 text-xs font-extrabold px-4 py-1.5 rounded-full mb-6 shadow-sm">
+            <Radio className="w-3.5 h-3.5 text-red-500 animate-pulse" />
+            <span>Gebze, Darıca & Çayırova Genelinde Aynı Gün Yerinde Servis</span>
           </div>
 
-          {/* ALT GÜVEN METRİKLERİ (4'LÜ ÇERÇEVE) */}
-          <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-3.5 max-w-5xl mx-auto text-left">
+          <h1 className="text-[1.85rem] xs:text-3xl sm:text-5xl lg:text-6xl 2xl:text-7xl font-black text-white tracking-tight leading-tight sm:leading-none">
+            Türkyılmaz Servis – <br className="hidden sm:block" />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-zinc-400">
+              Gebze, Darıca & Çayırova Beyaz Eşya Servisi
+            </span>
+          </h1>
+
+          <p className="mt-5 text-sm sm:text-lg text-zinc-300 max-w-3xl mx-auto leading-relaxed">
+            Türkyılmaz Beyaz Eşya Servisi olarak Gebze, Darıca ve Çayırova'da Arçelik, Beko, Vestel, Samsung ve diğer markalara yerinde servis hizmeti sunuyoruz. Dürüst arıza tespiti ve <strong className="text-white font-bold underline decoration-red-600 underline-offset-4">6 ay parça garantisi</strong> ile adresinizde tamir çözümleri.
+          </p>
+
+          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3.5">
+            <a
+              href={`tel:${cleanPhone}`}
+              className="relative overflow-hidden w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-gradient-to-r from-red-600 via-rose-600 to-red-700 hover:from-red-700 hover:to-rose-800 text-white font-black text-base px-8 py-4 rounded-2xl shadow-xl shadow-red-600/30 transition-all hover:scale-105 active:scale-95"
+            >
+              <span className="absolute inset-0 w-1/2 h-full bg-white/20 transform -skew-x-12 animate-shimmer" />
+              <PhoneCall className="w-5 h-5 animate-bounce" />
+              <span>Hemen Servis Çağır: {phone}</span>
+            </a>
+
+            <Link
+              href="/yedek-parca"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-zinc-900 hover:bg-zinc-800 text-zinc-100 font-bold text-base px-7 py-4 rounded-2xl border border-zinc-700/80 hover:border-zinc-400 shadow-lg transition-all hover:scale-105"
+            >
+              <PackageCheck className="w-5 h-5 text-red-500" />
+              <span>Yedek Parça Kataloğu</span>
+            </Link>
+          </div>
+
+          {/* GÜVEN METRİKLERİ */}
+          <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-3.5 max-w-4xl mx-auto text-left">
             <div className="bg-zinc-900/90 p-4 rounded-2xl border border-zinc-800 hover:border-zinc-700 transition">
               <div className="flex items-center justify-between mb-1.5">
                 <Clock className="w-5 h-5 text-red-500" />
@@ -309,8 +211,8 @@ export default async function Home() {
         <div className="flex items-center">
           <div className="animate-marquee flex items-center gap-6 whitespace-nowrap">
             {[...brands, ...brands].map((brand, i) => (
-              <div 
-                key={i} 
+              <div
+                key={i}
                 className="inline-flex items-center gap-2 bg-zinc-900/90 border border-zinc-800 text-zinc-200 text-xs font-bold px-4 py-2 rounded-xl transition cursor-default"
               >
                 <span className="w-1.5 h-1.5 rounded-full bg-red-600"></span>
@@ -337,8 +239,8 @@ export default async function Home() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((item: any) => (
-            <div 
-              key={item._id} 
+            <div
+              key={item._id}
               className="bg-zinc-900/90 rounded-3xl border border-zinc-800 p-6 sm:p-7 flex flex-col justify-between hover:border-zinc-600 transition-colors"
             >
               <div>
@@ -466,8 +368,8 @@ export default async function Home() {
 
         <div className="space-y-3.5">
           {faqs.map((faq, idx) => (
-            <div 
-              key={idx} 
+            <div
+              key={idx}
               className="bg-zinc-900/90 p-6 rounded-2xl border border-zinc-800"
             >
               <h3 className="font-bold text-white text-sm sm:text-base flex items-start gap-2.5">
@@ -554,7 +456,7 @@ export default async function Home() {
 
         <div className="max-w-7xl 2xl:max-w-[1440px] mx-auto mt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-zinc-400 text-[11px]">
           <p>© {new Date().getFullYear()} Türkyılmaz Beyaz Eşya Servisi. Tüm hakları saklıdır.</p>
-          
+
           <a
             href="https://affan-portfolio-gilt.vercel.app/"
             target="_blank"
