@@ -135,14 +135,14 @@ export default async function Home() {
           </div>
 
           <h1 className="text-[1.85rem] xs:text-3xl sm:text-5xl lg:text-6xl 2xl:text-7xl font-black text-white tracking-tight leading-tight sm:leading-none">
-            Gebze, Darıca & Çayırova <br className="hidden sm:block" />
+            Türkyılmaz Servis – <br className="hidden sm:block" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-zinc-400">
-              Beyaz Eşya, Klima & Kombi Servisi
+              Gebze, Darıca & Çayırova Beyaz Eşya Servisi
             </span>
           </h1>
 
           <p className="mt-5 text-sm sm:text-lg text-zinc-300 max-w-3xl mx-auto leading-relaxed">
-            Arçelik, Beko, Samsung, Grundig, Altus, Vestel, Regal, Keysmart, Flavel, Finlux, SEG, Kumtel ve Eminçelik cihazlarınızda dürüst arıza tespiti ve <strong className="text-white font-bold underline decoration-red-600 underline-offset-4">6 ay parça garantisi</strong> ile adresinizde tamir çözümleri.
+            Türkyılmaz Beyaz Eşya Servisi olarak Gebze, Darıca ve Çayırova'da Arçelik, Beko, Vestel, Samsung ve diğer markalara yerinde servis hizmeti sunuyoruz. Dürüst arıza tespiti ve <strong className="text-white font-bold underline decoration-red-600 underline-offset-4">6 ay parça garantisi</strong> ile adresinizde tamir çözümleri.
           </p>
 
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3.5">
@@ -280,7 +280,7 @@ export default async function Home() {
         <div className="bg-zinc-900/80 p-6 sm:p-8 rounded-3xl border border-zinc-800 text-xs text-zinc-300 space-y-3 leading-relaxed">
           <h2 className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
             <Building2 className="w-4 h-4 text-red-500" />
-            Gebze, Darıca & Çayırova Beyaz Eşya Servisi, Kombi & Klima Çözümleri
+            Türkyılmaz Servis – Darıca Beyaz Eşya Servisi
           </h2>
           <p>
             Türkyılmaz Beyaz Eşya Servisi olarak; <strong>Gebze</strong>, <strong>Darıca</strong>, <strong>Çayırova</strong> ve <strong>Dilovası</strong> başta olmak üzere Kocaeli genelinde <strong>Arçelik</strong>, <strong>Beko</strong>, <strong>Samsung</strong>, <strong>Grundig</strong>, <strong>Altus</strong>, <strong>Vestel</strong>, <strong>Regal</strong>, <strong>Keysmart</strong>, <strong>Flavel</strong>, <strong>Finlux</strong>, <strong>SEG</strong>, <strong>Kumtel</strong> ve <strong>Eminçelik</strong> markalarının buzdolabı motor değişimi, çamaşır makinesi kazan onarımı, bulaşık makinesi rezistans ve pompa tamiri, ankastre set üstü ocak tamiri ile klima gaz dolumu ve kombi bakımı alanında yerinde garantili hizmet sağlamaktayız.

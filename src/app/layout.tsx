@@ -12,10 +12,10 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL('https://turkyilmazservis.vercel.app'),
   title: {
-    default: 'Gebze, Darıca & Çayırova Beyaz Eşya Servisi | Arçelik Beko Vestel',
-    template: '%s | Türkyılmaz Beyaz Eşya Servisi'
+    default: 'Türkyılmaz Servis | Gebze, Darıca & Çayırova Beyaz Eşya Servisi',
+    template: '%s | Türkyılmaz Servis'
   },
-  description: 'Gebze, Darıca ve Çayırova geneli Arçelik, Beko, Samsung, Grundig, Altus, Vestel, Regal, Keysmart, Flavel, Finlux, SEG, Kumtel ve Eminçelik beyaz eşya tamiri. 6 ay garantili yerinde servis: 0552 116 41 28.',
+  description: "Türkyılmaz Servis; Gebze, Darıca ve Çayırova'da beyaz eşya, klima ve kombi servisi. Arçelik, Beko, Vestel, Samsung ve diğer markalara yerinde servis.",
   keywords: [
     'gebze beyaz eşya servisi',
     'darıca beyaz eşya servisi',
@@ -38,12 +38,12 @@ export const metadata: Metadata = {
   authors: [{ name: 'Türkyılmaz Beyaz Eşya Servisi' }, { name: 'CCN Teknoloji', url: 'https://affan-portfolio-gilt.vercel.app/' }],
   creator: 'CCN Teknoloji',
   alternates: {
-    canonical: '/',
+    canonical: 'https://www.turkyilmazservis.com/',
   },
   openGraph: {
-    title: 'Türkyılmaz Beyaz Eşya Servisi - Gebze, Darıca & Çayırova',
-    description: 'Arçelik, Beko, Samsung, Vestel, Kumtel, Eminçelik ve tüm lider markalarda aynı gün yerinde arıza tespiti ve 6 ay parça garantisi.',
-    url: 'https://turkyilmazservis.vercel.app',
+    title: 'Türkyılmaz Servis | Beyaz Eşya Servisi',
+    description: "Gebze, Darıca ve Çayırova'da Türkyılmaz Beyaz Eşya Servisi.",
+    url: 'https://www.turkyilmazservis.com/',
     siteName: 'Türkyılmaz Beyaz Eşya Servisi',
     images: [
       {
@@ -82,17 +82,17 @@ export default function RootLayout({
 }) {
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'ApplianceRepair',
-    '@id': 'https://turkyilmazservis.vercel.app/#business',
+    '@type': ['LocalBusiness', 'ApplianceRepair'],
+    '@id': 'https://www.turkyilmazservis.com/#business',
     name: 'Türkyılmaz Beyaz Eşya Servisi',
-    url: 'https://turkyilmazservis.vercel.app',
-    logo: 'https://turkyilmazservis.vercel.app/logo.png',
-    image: 'https://turkyilmazservis.vercel.app/logo.png',
+    url: 'https://www.turkyilmazservis.com/',
+    logo: 'https://www.turkyilmazservis.com/logo.png',
+    image: 'https://www.turkyilmazservis.com/logo.png',
     telephone: '+905521164128',
     priceRange: '₺₺',
     address: {
       '@type': 'PostalAddress',
-      streetAddress: 'Fevziçakmak Mah. Doktor Zeki Acar Cad., Şebnem Sk. No:11',
+      streetAddress: 'Fevziçakmak Mahallesi Doktor Zeki Acar Caddesi, Şebnem Sk. No:11',
       addressLocality: 'Darıca',
       addressRegion: 'Kocaeli',
       postalCode: '41700',
@@ -119,11 +119,11 @@ export default function RootLayout({
       }
     ],
     areaServed: [
-      { '@type': 'City', name: 'Gebze' },
-      { '@type': 'City', name: 'Darıca' },
-      { '@type': 'City', name: 'Çayırova' },
-      { '@type': 'City', name: 'Dilovası' },
-      { '@type': 'AdministrativeArea', name: 'Kocaeli' }
+      'Gebze',
+      'Darıca',
+      'Çayırova',
+      'Dilovası',
+      'Kocaeli'
     ],
     hasOfferCatalog: {
       '@type': 'OfferCatalog',

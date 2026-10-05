@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/studio/', '/api/'],
     },
-    sitemap: 'https://turkyilmazservis.vercel.app/sitemap.xml',
+    sitemap: 'https://www.turkyilmazservis.com/sitemap.xml',
   }
 }
