@@ -10,7 +10,8 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://turkyilmazservis.vercel.app'),
+  
+  metadataBase: new URL('https://www.turkyilmazservis.com'),
   title: {
     default: 'Türkyılmaz Servis | Gebze, Darıca & Çayırova Beyaz Eşya Servisi',
     template: '%s | Türkyılmaz Servis'

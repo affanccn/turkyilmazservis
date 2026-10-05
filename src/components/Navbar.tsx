@@ -16,7 +16,8 @@ export default function Navbar({ phone, cleanPhone }: NavbarProps) {
   const navLinks = [
     { href: '/', label: 'Ana Sayfa' },
     { href: '/islerimiz', label: 'Yapılan İşler' },
-    { href: '/yedek-parca', label: 'Yedek Parça & Ürünler' },
+    { href: '/yedek-parca', label: 'Yedek Parça' },
+    { href: '/blog', label: 'Arıza Rehberi' },
     { href: '/periyodik-bakim', label: 'Periyodik Bakım' },
     { href: '/iletisim', label: 'İletişim & Konum' },
   ]
