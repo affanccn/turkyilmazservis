@@ -57,12 +57,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   let blogPages: MetadataRoute.Sitemap = []
   try {
     const posts = await client.fetch(`*[_type == "post"] { "slug": slug.current, _updatedAt }`)
-    blogPages = (posts || []).map((post: any) => ({
-      url: `${baseUrl}/blog/${post.slug}`,
+    blogPages = (posts || []).map((post: any) => {
+      const cleanSlug = post.slug.startsWith('/') ? post.slug.substring(1) : post.slug;
+      return {
+        url: `${baseUrl}/blog/${cleanSlug}`,
       lastModified: post._updatedAt ? new Date(post._updatedAt) : currentDate,
       changeFrequency: 'weekly',
       priority: 0.8,
-    }))
+      }
+    })
   } catch (error) {
     console.error("Error fetching blog posts for sitemap:", error)
   }
