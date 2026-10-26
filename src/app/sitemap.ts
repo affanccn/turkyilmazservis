@@ -16,26 +16,26 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     {
       url: `${baseUrl}/islerimiz`,
       lastModified: currentDate,
-      changeFrequency: 'weekly',
+      changeFrequency: 'daily',
       priority: 0.9,
     },
     {
       url: `${baseUrl}/yedek-parca`,
       lastModified: currentDate,
       changeFrequency: 'weekly',
-      priority: 0.9,
+      priority: 0.85,
     },
     {
       url: `${baseUrl}/periyodik-bakim`,
       lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: 0.8,
+      changeFrequency: 'weekly',
+      priority: 0.85,
     },
     {
       url: `${baseUrl}/iletisim`,
       lastModified: currentDate,
       changeFrequency: 'monthly',
-      priority: 0.8,
+      priority: 0.85,
     },
     {
       url: `${baseUrl}/blog`,
@@ -46,26 +46,37 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ]
 
   // Otomatik üretilen tüm İlçe + Marka + Cihaz sayfalarını haritaya ekliyoruz
-  const dynamicLandingPages: MetadataRoute.Sitemap = LANDING_PAGES.map((page) => ({
-    url: `${baseUrl}/${page.slug}`,
-    lastModified: currentDate,
-    changeFrequency: 'weekly',
-    priority: 0.85,
-  }))
+  const dynamicLandingPages: MetadataRoute.Sitemap = LANDING_PAGES.map((page) => {
+    // Ana hedef kelimeler (teknik servis, beyaz eşya, buzdolabı, çamaşır) için daha yüksek öncelik
+    const isCorePage = page.slug.includes('teknik-servis') || 
+                       page.slug.includes('beyaz-esya-servisi') || 
+                       page.slug.includes('buzdolabi') || 
+                       page.slug.includes('camasir')
+    return {
+      url: `${baseUrl}/${page.slug}`,
+      lastModified: currentDate,
+      changeFrequency: 'daily',
+      priority: isCorePage ? 0.95 : 0.85,
+    }
+  })
 
   // Blog yazılarını haritaya ekliyoruz
   let blogPages: MetadataRoute.Sitemap = []
   try {
     const posts = await client.fetch(`*[_type == "post"] { "slug": slug.current, _updatedAt }`)
-    blogPages = (posts || []).map((post: any) => {
-      const cleanSlug = post.slug.startsWith('/') ? post.slug.substring(1) : post.slug;
-      return {
-        url: `${baseUrl}/blog/${cleanSlug}`,
-      lastModified: post._updatedAt ? new Date(post._updatedAt) : currentDate,
-      changeFrequency: 'weekly',
-      priority: 0.8,
-      }
-    })
+    blogPages = (posts || [])
+      .filter((post: any) => post && post.slug)
+      .map((post: any) => {
+        let cleanSlug = post.slug
+        if (cleanSlug.startsWith('/')) cleanSlug = cleanSlug.substring(1)
+        if (cleanSlug.startsWith('blog/')) cleanSlug = cleanSlug.replace('blog/', '')
+        return {
+          url: `${baseUrl}/blog/${cleanSlug}`,
+          lastModified: post._updatedAt ? new Date(post._updatedAt) : currentDate,
+          changeFrequency: 'weekly',
+          priority: 0.8,
+        }
+      })
   } catch (error) {
     console.error("Error fetching blog posts for sitemap:", error)
   }

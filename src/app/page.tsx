@@ -17,10 +17,21 @@ import {
   CalendarClock,
   Radio,
   Building2,
-  PackageCheck
+  PackageCheck,
+  Sparkles,
+  ArrowUpRight
 } from 'lucide-react'
+import type { Metadata } from 'next'
 
 export const revalidate = 60
+
+export const metadata: Metadata = {
+  title: 'Gebze & Darıca Teknik Servis | Beyaz Eşya, Buzdolabı, Çamaşır Tamiri',
+  description: "Gebze, Darıca ve Çayırova'da aynı gün yerinde teknik servis. Buzdolabı motor ve gaz dolumu, çamaşır makinesi kazan değişimi, bulaşık, kombi ve klima tamirinde 6 ay garanti: 0552 116 41 28.",
+  alternates: {
+    canonical: 'https://www.turkyilmazservis.com',
+  },
+}
 
 async function getData() {
   try {
@@ -40,7 +51,7 @@ async function getData() {
       services: activeServices,
       caseStudies
     }
-  } catch (error) {
+  } catch {
     return {
       settings: {
         phone: '0552 116 41 28',
@@ -72,29 +83,52 @@ export default async function Home() {
 
   const faqs = [
     {
-      q: 'Arıza tespiti ve servis süreci nasıl işliyor?',
-      a: 'Bizi arayıp arıza bildiriminde bulunduğunuzda, gezici servis ekibimiz aynı gün adresinize yönlendirilir. Cihazınız yerinde incelenir, doğrudan arıza teşhis edilir ve onayınızla işlem yapılır.'
+      q: 'Gebze ve Darıca bölgesinde arıza tespiti ve servis süreci nasıl işliyor?',
+      a: 'Bizi arayıp arıza bildiriminde bulunduğunuzda, gezici servis ekibimiz 25-45 dakika içinde adresinize yönlendirilir. Cihazınız yerinde incelenir, doğrudan arıza teşhis edilir ve onayınızla tamir edilir.'
     },
     {
       q: 'Yapılan tamir ve değişen parçalar garantili mi?',
-      a: 'Evet! Değiştirilen tüm orijinal yedek parçalar ve uzman işçiliğimiz 6 ay süresince resmi Türkyılmaz Servis garantisi altındadır.'
+      a: 'Evet! Değiştirilen tüm orijinal yedek parçalar ve uzman işçiliğimiz 6 ay süresince resmi Türkyılmaz Servis garantisi altındadır. Garanti belgesi kaşeli ve imzalı olarak teslim edilir.'
     },
     {
-      q: 'Hangi cihaz ve markalara hizmet veriyorsunuz?',
-      a: 'Arçelik, Beko, Samsung, Grundig, Altus, Vestel, Regal, Keysmart, Flavel, Finlux, SEG, Kumtel ve Eminçelik başta olmak üzere tüm buzdolabı, çamaşır, bulaşık, fırın, ankastre ocak, kurutma makineleri ile klima ve kombilere servis desteği sağlıyoruz.'
+      q: 'Buzdolabı soğutmama ve çamaşır makinesi kazan arızalarında yerinde tamir mümkün mü?',
+      a: 'Evet. Tam donanımlı mobil servis araçlarımızda gaz dolum tüpleri, presli orijinal kazanlar, motorlar ve rezistanslar hazır bulunur. Arızaların %95’i evinizde gözünüzün önünde çözülür.'
+    },
+    {
+      q: 'Hangi cihaz ve markalara teknik servis hizmeti veriyorsunuz?',
+      a: 'Arçelik, Beko, Samsung, Grundig, Altus, Vestel, Regal, Keysmart, Flavel, Finlux, SEG, Kumtel ve Eminçelik başta olmak üzere tüm buzdolabı, çamaşır, bulaşık, fırın, ankastre ocak, kurutma makineleri ile kombi ve klimalara servis desteği sağlıyoruz.'
     },
     {
       q: 'Gebze, Darıca ve Çayırova dışındaki ilçelere servisiniz var mı?',
-      a: 'Evet. Mobil gezici araçlarımızla Gebze, Darıca, Çayırova ve Dilovası başta olmak üzere Kocaeli geneline aynı gün servis yönlendiriyoruz.'
+      a: 'Evet. Mobil gezici araçlarımızla Gebze, Darıca, Çayırova ve Dilovası başta olmak üzere Kocaeli ve Tuzla Şifa bölgesine aynı gün servis yönlendiriyoruz.'
     },
     {
-      q: 'Periyodik bakım yaptırmanın avantajı nedir?',
-      a: 'Kombilerde 6 ayda bir, beyaz eşyalarda yılda bir yapılan düzenli kontroller cihazın ömrünü iki katına çıkarır, enerji tasarrufu sağlar ve yüksek maliyetli arızaların önüne geçer.'
+      q: 'Kombi ve klima periyodik bakım yaptırmanın avantajı nedir?',
+      a: 'Kombilerde 6 ayda bir, klimalarda ve beyaz eşyalarda yılda bir yapılan düzenli kontroller cihazın ömrünü iki katına çıkarır, enerji tasarrufu sağlar ve yüksek maliyetli arızaların önüne geçer.'
     }
   ]
 
+  const homeFaqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map(f => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: f.a
+      }
+    }))
+  }
+
   return (
     <main className="relative min-h-screen bg-zinc-950 text-slate-100 selection:bg-red-600 selection:text-white pb-28 sm:pb-0 overflow-x-hidden tech-grid-bg">
+
+      {/* SSS Schema Zengin Sonuç Enjeksiyonu */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(homeFaqSchema) }}
+      />
 
       {/* Arka Plan Işıkları */}
       <div className="pointer-events-none absolute -left-40 top-0 w-96 h-96 bg-red-600/10 rounded-full blur-3xl -z-10" />
@@ -131,18 +165,18 @@ export default async function Home() {
 
           <div className="inline-flex items-center gap-2 bg-zinc-900 border border-zinc-700/80 text-zinc-200 text-xs font-extrabold px-4 py-1.5 rounded-full mb-6 shadow-sm">
             <Radio className="w-3.5 h-3.5 text-red-500 animate-pulse" />
-            <span>Gebze, Darıca & Çayırova Genelinde Aynı Gün Yerinde Servis</span>
+            <span>Gebze & Darıca Genelinde Aynı Gün Yerinde Garantili Teknik Servis</span>
           </div>
 
           <h1 className="text-[1.85rem] xs:text-3xl sm:text-5xl lg:text-6xl 2xl:text-7xl font-black text-white tracking-tight leading-tight sm:leading-none">
             Türkyılmaz Servis – <br className="hidden sm:block" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-zinc-400">
-              Gebze, Darıca & Çayırova Beyaz Eşya Servisi
+              Gebze & Darıca Teknik Servis
             </span>
           </h1>
 
           <p className="mt-5 text-sm sm:text-lg text-zinc-300 max-w-3xl mx-auto leading-relaxed">
-            Türkyılmaz Beyaz Eşya Servisi olarak Gebze, Darıca ve Çayırova'da Arçelik, Beko, Vestel, Samsung ve diğer markalara yerinde servis hizmeti sunuyoruz. Dürüst arıza tespiti ve <strong className="text-white font-bold underline decoration-red-600 underline-offset-4">6 ay parça garantisi</strong> ile adresinizde tamir çözümleri.
+            Türkyılmaz Teknik Servis olarak Gebze, Darıca ve Çayırova'da buzdolabı, çamaşır makinesi, bulaşık makinesi, klima ve kombi arızalarına yerinde müdahale ediyoruz. Dürüst arıza tespiti ve <strong className="text-white font-bold underline decoration-red-600 underline-offset-4">6 ay parça garantisi</strong> ile adresinizde kalıcı çözümler.
           </p>
 
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3.5">
@@ -156,11 +190,11 @@ export default async function Home() {
             </a>
 
             <Link
-              href="/yedek-parca"
+              href="/islerimiz"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-zinc-900 hover:bg-zinc-800 text-zinc-100 font-bold text-base px-7 py-4 rounded-2xl border border-zinc-700/80 hover:border-zinc-400 shadow-lg transition-all hover:scale-105"
             >
-              <PackageCheck className="w-5 h-5 text-red-500" />
-              <span>Yedek Parça Kataloğu</span>
+              <Wrench className="w-5 h-5 text-red-500" />
+              <span>Sahadan Gerçek İşlerimiz</span>
             </Link>
           </div>
 
@@ -272,26 +306,265 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* 6. GALERİ */}
+      {/* ======================================================== */}
+      {/* 6. BÖLGESEL SEO MERKEZİ & HIZLI ERİŞİM (GEBZE & DARICA) */}
+      {/* GOOGLE'IN DİZİNE EKLEMESİNİ SAĞLAYAN GÜÇLÜ İÇ LİNKLEME AĞI */}
+      {/* ======================================================== */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl 2xl:max-w-[1440px] mx-auto border-t border-zinc-900">
+        <div className="text-center max-w-3xl mx-auto mb-12">
+          <div className="inline-flex items-center gap-2 text-xs font-bold text-red-400 tracking-wider uppercase bg-red-950/60 px-4 py-1.5 rounded-full border border-red-600/30 mb-3">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>Hizmet Ağımız ve Popüler Çözümler</span>
+          </div>
+          <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight">
+            Gebze ve Darıca Teknik Servis Noktalarımız
+          </h2>
+          <p className="text-zinc-400 mt-2 text-sm leading-relaxed">
+            İlçenizi ve arızalı cihazınızı seçerek aynı gün yerinde servis talebi oluşturun. 6 ay garantili parça değişimi.
+          </p>
+        </div>
+
+        <div className="grid lg:grid-cols-3 gap-6">
+          
+          {/* Kolon 1: Gebze Teknik Servis & Hizmetleri */}
+          <div className="bg-zinc-900/90 rounded-3xl border border-zinc-800 p-6 flex flex-col justify-between hover:border-zinc-700 transition">
+            <div>
+              <div className="flex items-center gap-2.5 text-red-500 font-extrabold text-base mb-2">
+                <MapPin className="w-5 h-5 shrink-0" />
+                <h3>Gebze Teknik Servis</h3>
+              </div>
+              <p className="text-xs text-zinc-400 mb-5 leading-relaxed">
+                Gebze merkez, Yenikent, Arapçeşme, Gaziler, Osman Yılmaz ve tüm mahallelerde 25-45 dk adrese varış:
+              </p>
+              <div className="space-y-2">
+                <Link
+                  href="/gebze-teknik-servis"
+                  className="group flex items-center justify-between text-xs font-bold text-white bg-zinc-950/80 hover:bg-red-600/20 border border-zinc-800 hover:border-red-500/50 p-3 rounded-xl transition"
+                >
+                  <span>Gebze Teknik Servis (Genel)</span>
+                  <ArrowUpRight className="w-4 h-4 text-zinc-500 group-hover:text-red-400 transition" />
+                </Link>
+                <Link
+                  href="/gebze-beyaz-esya-servisi"
+                  className="group flex items-center justify-between text-xs font-bold text-zinc-200 bg-zinc-950/80 hover:bg-zinc-800 border border-zinc-800/80 p-3 rounded-xl transition"
+                >
+                  <span>Gebze Beyaz Eşya Servisi</span>
+                  <ArrowUpRight className="w-4 h-4 text-zinc-500 group-hover:text-white transition" />
+                </Link>
+                <Link
+                  href="/gebze-buzdolabi-servisi"
+                  className="group flex items-center justify-between text-xs font-semibold text-zinc-300 bg-zinc-950/80 hover:bg-zinc-800 border border-zinc-800/80 p-2.5 rounded-xl transition"
+                >
+                  <span>Gebze Buzdolabı Servisi & Gaz Dolumu</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-zinc-500 group-hover:text-white transition" />
+                </Link>
+                <Link
+                  href="/gebze-camasir-makinesi-servisi"
+                  className="group flex items-center justify-between text-xs font-semibold text-zinc-300 bg-zinc-950/80 hover:bg-zinc-800 border border-zinc-800/80 p-2.5 rounded-xl transition"
+                >
+                  <span>Gebze Çamaşır Makinesi Tamiri & Kazan</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-zinc-500 group-hover:text-white transition" />
+                </Link>
+                <Link
+                  href="/gebze-bulasik-makinesi-servisi"
+                  className="group flex items-center justify-between text-xs font-semibold text-zinc-300 bg-zinc-950/80 hover:bg-zinc-800 border border-zinc-800/80 p-2.5 rounded-xl transition"
+                >
+                  <span>Gebze Bulaşık Makinesi Servisi</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-zinc-500 group-hover:text-white transition" />
+                </Link>
+                <Link
+                  href="/gebze-kombi-servisi"
+                  className="group flex items-center justify-between text-xs font-semibold text-zinc-300 bg-zinc-950/80 hover:bg-zinc-800 border border-zinc-800/80 p-2.5 rounded-xl transition"
+                >
+                  <span>Gebze Kombi Bakımı & Petek Temizliği</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-zinc-500 group-hover:text-white transition" />
+                </Link>
+                <Link
+                  href="/gebze-klima-servisi"
+                  className="group flex items-center justify-between text-xs font-semibold text-zinc-300 bg-zinc-950/80 hover:bg-zinc-800 border border-zinc-800/80 p-2.5 rounded-xl transition"
+                >
+                  <span>Gebze Klima Servisi & Gaz Şarjı</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-zinc-500 group-hover:text-white transition" />
+                </Link>
+              </div>
+            </div>
+            <div className="mt-5 pt-4 border-t border-zinc-800 text-[11px] text-zinc-400">
+              <span className="font-bold text-white">Popüler Markalar: </span>
+              <Link href="/gebze-arcelik-servisi" className="hover:text-red-400 transition underline underline-offset-2 mr-2">Arçelik</Link>
+              <Link href="/gebze-beko-servisi" className="hover:text-red-400 transition underline underline-offset-2 mr-2">Beko</Link>
+              <Link href="/gebze-samsung-servisi" className="hover:text-red-400 transition underline underline-offset-2 mr-2">Samsung</Link>
+              <Link href="/gebze-vestel-servisi" className="hover:text-red-400 transition underline underline-offset-2">Vestel</Link>
+            </div>
+          </div>
+
+          {/* Kolon 2: Darıca Teknik Servis & Hizmetleri */}
+          <div className="bg-zinc-900/90 rounded-3xl border border-zinc-800 p-6 flex flex-col justify-between hover:border-zinc-700 transition">
+            <div>
+              <div className="flex items-center gap-2.5 text-red-500 font-extrabold text-base mb-2">
+                <MapPin className="w-5 h-5 shrink-0" />
+                <h3>Darıca Teknik Servis (Atölye Merkezimiz)</h3>
+              </div>
+              <p className="text-xs text-zinc-400 mb-5 leading-relaxed">
+                Fevziçakmak, Bayramoğlu, Piri Reis, Nenehatun, Kazımkarabekir ve tüm Darıca genelinde 20-30 dk ulaşım:
+              </p>
+              <div className="space-y-2">
+                <Link
+                  href="/darica-teknik-servis"
+                  className="group flex items-center justify-between text-xs font-bold text-white bg-zinc-950/80 hover:bg-red-600/20 border border-zinc-800 hover:border-red-500/50 p-3 rounded-xl transition"
+                >
+                  <span>Darıca Teknik Servis (Merkez)</span>
+                  <ArrowUpRight className="w-4 h-4 text-zinc-500 group-hover:text-red-400 transition" />
+                </Link>
+                <Link
+                  href="/darica-beyaz-esya-servisi"
+                  className="group flex items-center justify-between text-xs font-bold text-zinc-200 bg-zinc-950/80 hover:bg-zinc-800 border border-zinc-800/80 p-3 rounded-xl transition"
+                >
+                  <span>Darıca Beyaz Eşya Servisi</span>
+                  <ArrowUpRight className="w-4 h-4 text-zinc-500 group-hover:text-white transition" />
+                </Link>
+                <Link
+                  href="/darica-buzdolabi-tamiri"
+                  className="group flex items-center justify-between text-xs font-semibold text-zinc-300 bg-zinc-950/80 hover:bg-zinc-800 border border-zinc-800/80 p-2.5 rounded-xl transition"
+                >
+                  <span>Darıca Buzdolabı Tamiri & Gaz Dolumu</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-zinc-500 group-hover:text-white transition" />
+                </Link>
+                <Link
+                  href="/darica-camasir-makinesi-tamiri"
+                  className="group flex items-center justify-between text-xs font-semibold text-zinc-300 bg-zinc-950/80 hover:bg-zinc-800 border border-zinc-800/80 p-2.5 rounded-xl transition"
+                >
+                  <span>Darıca Çamaşır Makinesi Tamiri & Rulman</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-zinc-500 group-hover:text-white transition" />
+                </Link>
+                <Link
+                  href="/darica-bulasik-makinesi-servisi"
+                  className="group flex items-center justify-between text-xs font-semibold text-zinc-300 bg-zinc-950/80 hover:bg-zinc-800 border border-zinc-800/80 p-2.5 rounded-xl transition"
+                >
+                  <span>Darıca Bulaşık Makinesi Servisi</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-zinc-500 group-hover:text-white transition" />
+                </Link>
+                <Link
+                  href="/darica-kombi-servisi"
+                  className="group flex items-center justify-between text-xs font-semibold text-zinc-300 bg-zinc-950/80 hover:bg-zinc-800 border border-zinc-800/80 p-2.5 rounded-xl transition"
+                >
+                  <span>Darıca Kombi Bakımı & Petek Temizliği</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-zinc-500 group-hover:text-white transition" />
+                </Link>
+                <Link
+                  href="/darica-klima-servisi"
+                  className="group flex items-center justify-between text-xs font-semibold text-zinc-300 bg-zinc-950/80 hover:bg-zinc-800 border border-zinc-800/80 p-2.5 rounded-xl transition"
+                >
+                  <span>Darıca Klima Servisi & Gaz Dolumu</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-zinc-500 group-hover:text-white transition" />
+                </Link>
+              </div>
+            </div>
+            <div className="mt-5 pt-4 border-t border-zinc-800 text-[11px] text-zinc-400">
+              <span className="font-bold text-white">Marka Servisleri: </span>
+              <Link href="/darica-arcelik-servisi" className="hover:text-red-400 transition underline underline-offset-2 mr-2">Darıca Arçelik</Link>
+              <Link href="/darica-beko-servisi" className="hover:text-red-400 transition underline underline-offset-2">Darıca Beko</Link>
+            </div>
+          </div>
+
+          {/* Kolon 3: Çayırova & Tuzla Şifa Mobil Hatları */}
+          <div className="bg-zinc-900/90 rounded-3xl border border-zinc-800 p-6 flex flex-col justify-between hover:border-zinc-700 transition">
+            <div>
+              <div className="flex items-center gap-2.5 text-red-500 font-extrabold text-base mb-2">
+                <MapPin className="w-5 h-5 shrink-0" />
+                <h3>Çayırova & Çevre Bölgeler</h3>
+              </div>
+              <p className="text-xs text-zinc-400 mb-5 leading-relaxed">
+                Yenimahalle, Özgürlük, Akse, Dilovası ve Tuzla Şifa Mahallesine aynı gün yerinde servis:
+              </p>
+              <div className="space-y-2">
+                <Link
+                  href="/cayirova-teknik-servis"
+                  className="group flex items-center justify-between text-xs font-bold text-white bg-zinc-950/80 hover:bg-red-600/20 border border-zinc-800 hover:border-red-500/50 p-3 rounded-xl transition"
+                >
+                  <span>Çayırova Teknik Servis (Genel)</span>
+                  <ArrowUpRight className="w-4 h-4 text-zinc-500 group-hover:text-red-400 transition" />
+                </Link>
+                <Link
+                  href="/cayirova-beyaz-esya-servisi"
+                  className="group flex items-center justify-between text-xs font-bold text-zinc-200 bg-zinc-950/80 hover:bg-zinc-800 border border-zinc-800/80 p-3 rounded-xl transition"
+                >
+                  <span>Çayırova Beyaz Eşya Servisi</span>
+                  <ArrowUpRight className="w-4 h-4 text-zinc-500 group-hover:text-white transition" />
+                </Link>
+                <Link
+                  href="/cayirova-buzdolabi-servisi"
+                  className="group flex items-center justify-between text-xs font-semibold text-zinc-300 bg-zinc-950/80 hover:bg-zinc-800 border border-zinc-800/80 p-2.5 rounded-xl transition"
+                >
+                  <span>Çayırova Buzdolabı Tamiri</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-zinc-500 group-hover:text-white transition" />
+                </Link>
+                <Link
+                  href="/cayirova-camasir-makinesi-servisi"
+                  className="group flex items-center justify-between text-xs font-semibold text-zinc-300 bg-zinc-950/80 hover:bg-zinc-800 border border-zinc-800/80 p-2.5 rounded-xl transition"
+                >
+                  <span>Çayırova Çamaşır Makinesi Tamiri</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-zinc-500 group-hover:text-white transition" />
+                </Link>
+                <Link
+                  href="/tuzla-beyaz-esya-servisi"
+                  className="group flex items-center justify-between text-xs font-semibold text-zinc-300 bg-zinc-950/80 hover:bg-zinc-800 border border-zinc-800/80 p-2.5 rounded-xl transition"
+                >
+                  <span>Tuzla & Şifa Mahallesi Servisi</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-zinc-500 group-hover:text-white transition" />
+                </Link>
+                <Link
+                  href="/periyodik-bakim"
+                  className="group flex items-center justify-between text-xs font-semibold text-zinc-300 bg-zinc-950/80 hover:bg-zinc-800 border border-zinc-800/80 p-2.5 rounded-xl transition"
+                >
+                  <span>Kombi & Klima Periyodik Bakım Kaydı</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-zinc-500 group-hover:text-white transition" />
+                </Link>
+                <Link
+                  href="/blog"
+                  className="group flex items-center justify-between text-xs font-semibold text-zinc-300 bg-zinc-950/80 hover:bg-zinc-800 border border-zinc-800/80 p-2.5 rounded-xl transition"
+                >
+                  <span>Arıza Kütüphanesi & Hata Kodları</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-zinc-500 group-hover:text-white transition" />
+                </Link>
+              </div>
+            </div>
+            <div className="mt-5 p-3 rounded-2xl bg-zinc-950 border border-zinc-800 flex items-center justify-between">
+              <div>
+                <p className="text-xs font-bold text-white">Acil Servis Hattı</p>
+                <p className="text-[10px] text-zinc-400">Tek tıkla ustamıza bağlanın.</p>
+              </div>
+              <a
+                href={`tel:${cleanPhone}`}
+                className="bg-red-600 hover:bg-red-700 text-white font-bold text-xs px-3.5 py-2 rounded-xl transition shadow-sm"
+              >
+                0552 116 41 28
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* 7. GALERİ */}
       <RepairGallery items={caseStudies} />
 
-      {/* 7. BÖLGESEL SEO BİLGİLENDİRME BLOĞU */}
+      {/* 8. BÖLGESEL SEO BİLGİLENDİRME BLOĞU */}
       <section className="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl 2xl:max-w-[1440px] mx-auto">
         <div className="bg-zinc-900/80 p-6 sm:p-8 rounded-3xl border border-zinc-800 text-xs text-zinc-300 space-y-3 leading-relaxed">
           <h2 className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
             <Building2 className="w-4 h-4 text-red-500" />
-            Türkyılmaz Servis – Darıca Beyaz Eşya Servisi
+            Türkyılmaz Servis – Gebze & Darıca Yetkili Standartlarında Özel Teknik Servis
           </h2>
           <p>
-            Türkyılmaz Beyaz Eşya Servisi olarak; <strong>Gebze</strong>, <strong>Darıca</strong>, <strong>Çayırova</strong> ve <strong>Dilovası</strong> başta olmak üzere Kocaeli genelinde <strong>Arçelik</strong>, <strong>Beko</strong>, <strong>Samsung</strong>, <strong>Grundig</strong>, <strong>Altus</strong>, <strong>Vestel</strong>, <strong>Regal</strong>, <strong>Keysmart</strong>, <strong>Flavel</strong>, <strong>Finlux</strong>, <strong>SEG</strong>, <strong>Kumtel</strong> ve <strong>Eminçelik</strong> markalarının buzdolabı motor değişimi, çamaşır makinesi kazan onarımı, bulaşık makinesi rezistans ve pompa tamiri, ankastre set üstü ocak tamiri ile klima gaz dolumu ve kombi bakımı alanında yerinde garantili hizmet sağlamaktayız.
+            Türkyılmaz Beyaz Eşya ve Teknik Servis olarak; <strong>Gebze</strong>, <strong>Darıca</strong>, <strong>Çayırova</strong> ve <strong>Dilovası</strong> başta olmak üzere Kocaeli genelinde <strong>Arçelik</strong>, <strong>Beko</strong>, <strong>Samsung</strong>, <strong>Grundig</strong>, <strong>Altus</strong>, <strong>Vestel</strong>, <strong>Regal</strong>, <strong>Keysmart</strong>, <strong>Flavel</strong>, <strong>Finlux</strong>, <strong>SEG</strong>, <strong>Kumtel</strong> ve <strong>Eminçelik</strong> markalarının buzdolabı motor değişimi, kompresör gaz şarjı, çamaşır makinesi presli kazan onarımı, bulaşık makinesi sirkülasyon rezistansı ve tahliye pompa tamiri, ankastre set üstü ocak temperli cam değişimi ile klima gaz dolumu ve kombi ilaçlı petek temizliği alanında yerinde garantili hizmet sağlamaktayız.
           </p>
           <p>
-            Darıca Fevziçakmak Mahallesi atölyemizden hareket eden donanımlı gezici servis araçlarımız, adresinize gelerek cihazınızı yerinde test eder ve değişen her parçaya 6 ay resmi servis garantisi sunar.
+            Darıca Fevziçakmak Mahallesi atölyemizden hareket eden donanımlı mobil gezici araçlarımız, adresinize gelerek cihazınızı yerinde test eder ve değişen her orijinal parçaya 6 ay resmi Türkyılmaz Servis garanti formu sunar.
           </p>
         </div>
       </section>
 
-      {/* 8. HARİTA BÖLÜMÜ */}
+      {/* 9. HARİTA BÖLÜMÜ */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl 2xl:max-w-[1440px] mx-auto">
         <div className="bg-zinc-900/90 rounded-3xl border border-zinc-800 p-6 sm:p-10 shadow-xl">
           <div className="grid lg:grid-cols-2 gap-8 items-center">
@@ -352,7 +625,7 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* 9. SSS */}
+      {/* 10. SSS */}
       <section className="py-16 px-4 max-w-4xl mx-auto">
         <div className="text-center mb-10">
           <span className="text-xs font-bold text-zinc-300 tracking-wider uppercase bg-zinc-900 px-4 py-1.5 rounded-full border border-zinc-700">
@@ -362,7 +635,7 @@ export default async function Home() {
             Sıkça Sorulan Sorular
           </h2>
           <p className="text-zinc-300 mt-2 text-sm">
-            Beyaz eşya, ankastre, klima ve kombi tamir süreçleriyle ilgili tüm merak edilenler.
+            Gebze ve Darıca beyaz eşya, ankastre, klima ve kombi tamir süreçleriyle ilgili tüm merak edilenler.
           </p>
         </div>
 
@@ -384,14 +657,14 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* 10. ACİL ÇAĞRI BANNERI */}
+      {/* 11. ACİL ÇAĞRI BANNERI */}
       <section className="py-12 px-4 max-w-5xl mx-auto">
         <div className="bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-900 border border-zinc-700 text-white rounded-3xl p-8 sm:p-12 text-center shadow-2xl relative overflow-hidden">
           <h2 className="text-2xl sm:text-4xl font-black tracking-tight">
             Cihazınızda Bir Arıza mı Var?
           </h2>
           <p className="mt-3 text-zinc-300 text-sm sm:text-base max-w-xl mx-auto">
-            Gereksiz masraf ödemeden önce bize danışın. Adresinizde yerinde kontrol edip kalıcı çözümü üretelim.
+            Gereksiz parça masrafı ödemeden önce bize danışın. Adresinizde yerinde kontrol edip 6 ay garantili kalıcı çözümü üretelim.
           </p>
           <div className="mt-7 flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
@@ -406,32 +679,48 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* 11. FOOTER */}
+      {/* 12. FOOTER */}
       <footer className="bg-black text-zinc-300 py-14 px-4 sm:px-6 lg:px-8 border-t border-zinc-900 text-xs">
         <div className="max-w-7xl 2xl:max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 pb-10 border-b border-zinc-900">
-          <div className="md:col-span-2 space-y-4">
+          <div className="md:col-span-1 space-y-4">
             <div className="flex items-center gap-3">
               <div className="relative w-11 h-11 rounded-xl overflow-hidden bg-zinc-900 border border-zinc-800">
                 <Image src="/logo.png" alt="Türkyılmaz Servis" fill className="object-contain p-1" />
               </div>
               <div>
-                <p className="font-extrabold text-white text-base">TÜRKYILMAZ BEYAZ EŞYA SERVİSİ</p>
-                <p className="text-xs text-zinc-400 font-semibold">Gebze, Darıca & Çayırova Servis Ağı</p>
+                <p className="font-extrabold text-white text-base">TÜRKYILMAZ SERVİS</p>
+                <p className="text-xs text-zinc-400 font-semibold">Gebze & Darıca Teknik Servis</p>
               </div>
             </div>
             <p className="text-zinc-400 text-xs leading-relaxed max-w-md">
-              Arçelik, Beko, Samsung, Grundig, Altus, Vestel, Regal, Keysmart, Flavel, Finlux, SEG, Kumtel ve Eminçelik cihazlarında 6 ay parça garantili yerinde servis hizmeti.
+              Gebze, Darıca, Çayırova ve Kocaeli genelinde buzdolabı, çamaşır, bulaşık makinesi, klima ve kombi arızalarında 6 ay parça garantili yerinde servis.
             </p>
           </div>
 
+          {/* Gebze & Darıca Linkleri */}
           <div>
-            <p className="font-bold text-white text-sm uppercase tracking-wider mb-3">Sayfalar</p>
+            <p className="font-bold text-white text-sm uppercase tracking-wider mb-3">Gebze Servis Noktaları</p>
             <ul className="space-y-2 text-zinc-400">
-              <li><Link href="/" className="hover:text-white transition">Ana Sayfa</Link></li>
-              <li><Link href="/islerimiz" className="hover:text-white transition">Yapılan Sahadan İşler</Link></li>
-              <li><Link href="/yedek-parca" className="hover:text-white transition">Yedek Parça & Ürünler</Link></li>
-              <li><Link href="/periyodik-bakim" className="hover:text-white transition">Periyodik Bakım Kaydı</Link></li>
-              <li><Link href="/iletisim" className="hover:text-white transition">İletişim & Dükkan Konumu</Link></li>
+              <li><Link href="/gebze-teknik-servis" className="hover:text-white transition">Gebze Teknik Servis</Link></li>
+              <li><Link href="/gebze-beyaz-esya-servisi" className="hover:text-white transition">Gebze Beyaz Eşya Servisi</Link></li>
+              <li><Link href="/gebze-buzdolabi-servisi" className="hover:text-white transition">Gebze Buzdolabı Servisi</Link></li>
+              <li><Link href="/gebze-camasir-makinesi-servisi" className="hover:text-white transition">Gebze Çamaşır Makinesi Tamiri</Link></li>
+              <li><Link href="/gebze-bulasik-makinesi-servisi" className="hover:text-white transition">Gebze Bulaşık Makinesi Servisi</Link></li>
+              <li><Link href="/gebze-kombi-servisi" className="hover:text-white transition">Gebze Kombi & Petek Temizliği</Link></li>
+              <li><Link href="/gebze-klima-servisi" className="hover:text-white transition">Gebze Klima Bakımı</Link></li>
+            </ul>
+          </div>
+
+          <div>
+            <p className="font-bold text-white text-sm uppercase tracking-wider mb-3">Darıca & Çayırova Servis</p>
+            <ul className="space-y-2 text-zinc-400">
+              <li><Link href="/darica-teknik-servis" className="hover:text-white transition">Darıca Teknik Servis</Link></li>
+              <li><Link href="/darica-beyaz-esya-servisi" className="hover:text-white transition">Darıca Beyaz Eşya Servisi</Link></li>
+              <li><Link href="/darica-buzdolabi-tamiri" className="hover:text-white transition">Darıca Buzdolabı Tamiri</Link></li>
+              <li><Link href="/darica-camasir-makinesi-tamiri" className="hover:text-white transition">Darıca Çamaşır Makinesi Tamiri</Link></li>
+              <li><Link href="/darica-bulasik-makinesi-servisi" className="hover:text-white transition">Darıca Bulaşık Makinesi Servisi</Link></li>
+              <li><Link href="/cayirova-teknik-servis" className="hover:text-white transition">Çayırova Teknik Servis</Link></li>
+              <li><Link href="/cayirova-beyaz-esya-servisi" className="hover:text-white transition">Çayırova Beyaz Eşya Servisi</Link></li>
             </ul>
           </div>
 
@@ -455,7 +744,7 @@ export default async function Home() {
         </div>
 
         <div className="max-w-7xl 2xl:max-w-[1440px] mx-auto mt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-zinc-400 text-[11px]">
-          <p>© {new Date().getFullYear()} Türkyılmaz Beyaz Eşya Servisi. Tüm hakları saklıdır.</p>
+          <p>© {new Date().getFullYear()} Türkyılmaz Beyaz Eşya & Teknik Servis. Tüm hakları saklıdır.</p>
 
           <a
             href="https://affan-portfolio-gilt.vercel.app/"
@@ -472,7 +761,7 @@ export default async function Home() {
         </div>
       </footer>
 
-      {/* 12. WHATSAPP & MOBİL STICKY BAR */}
+      {/* 13. WHATSAPP & MOBİL STICKY BAR */}
       <WhatsappWidget phone={phone} />
 
     </main>

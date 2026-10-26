@@ -167,7 +167,7 @@ export const DEFAULT_PARTS: SparePartItemType[] = [
     compatibleBrands: 'Vestel, Profilo, Regal',
     condition: 'new',
     description: 'Suyu ısıtmama hatası veren modeller için orijinal soketli sirkülasyon ısıtıcı tüp.',
-    image: '/galeri/bulasik-rezistans.jpg',
+    image: '/galeri/bulasik-rezistans.jpeg',
   },
   {
     _id: 'part-3',
