@@ -325,7 +325,7 @@ export default async function Home() {
         </div>
 
         <div className="grid lg:grid-cols-3 gap-6">
-          
+
           {/* Kolon 1: Gebze Teknik Servis & Hizmetleri */}
           <div className="bg-zinc-900/90 rounded-3xl border border-zinc-800 p-6 flex flex-col justify-between hover:border-zinc-700 transition">
             <div>
